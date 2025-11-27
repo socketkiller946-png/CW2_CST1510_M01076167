@@ -1,15 +1,1 @@
-<<<<<<< HEAD
-# Python example 
-__pycache__/ 
-*.pyc 
-.env 
-.vscode/ 
-.idea/ 
-=======
-# Python example 
-__pycache__/ 
-*.pyc 
-.env 
-.vscode/ 
-.idea/ 
->>>>>>> 956e55d34c30e320d68454ba29e08d011bb7f5ee
+
