@@ -1,9 +1,14 @@
 import pandas as pd
 
 def insert_ticket(conn, ticket_id, priority, status, category, subject, description, assigned_to=None, resolution_time_hours=None, created_date=None, resolved_date=None):
+    """Inserts a single ticket record into the it_tickets table."""
     cursor = conn.cursor()
-    cursor.execute('\n        INSERT INTO it_tickets\n        (ticket_id, priority, status, category, subject, description,\n         created_date, resolved_date, assigned_to, resolution_time_hours)\n        VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)\n    ', (ticket_id, priority, status, category, subject, description, created_date, resolved_date, assigned_to, resolution_time_hours))
-    conn.commit()
+    cursor.execute('''
+        INSERT INTO it_tickets
+        (ticket_id, priority, status, category, subject, description,
+         created_date, resolved_date, assigned_to, resolution_time_hours)
+        VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+    ''', (ticket_id, priority, status, category, subject, description, created_date, resolved_date, assigned_to, resolution_time_hours))
     return cursor.lastrowid
 
 def get_all_tickets(conn):

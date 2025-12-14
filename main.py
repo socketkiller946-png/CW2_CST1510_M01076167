@@ -27,6 +27,12 @@ def load_csv_to_table(csv_path, table_name):
                 'timestamp': 'date',
                 'category': 'incident_type'
             })
+
+            # 1. Convert to datetime objects
+            df['date'] = pd.to_datetime(df['date'])
+
+            # 2. Format the datetime object to string, explicitly keeping YYYY-MM-DD HH:MM:SS
+            df['date'] = df['date'].dt.strftime('%Y-%m-%d %H:%M:%S')
             df = df[['id', 'date', 'incident_type', 'severity', 'status', 'description']]
 
         elif table_name == "datasets_metadata":
@@ -44,7 +50,7 @@ def load_csv_to_table(csv_path, table_name):
                 'description': 'subject',
                 'created_at': 'created_date'
             })
-            df = df[['ticket_id', 'priority', 'status', 'assigned_to', 'subject', 'created_date']]
+            df = df[['ticket_id', 'priority', 'status', 'assigned_to', 'subject','resolution_time_hours','created_date']]
 
         # Connect to database
         conn = connect_database()
@@ -60,8 +66,6 @@ def load_csv_to_table(csv_path, table_name):
     except Exception as e:
         print(f"   Error: {e}")
         return 0
-
-
 
 def main():
     print("=" * 60)
@@ -167,10 +171,6 @@ def setup_database_complete():
     print("=" * 60)
     print(f"\n Database location: DATA/intelligence_platform.db")
     print("\nYou're ready for Week 9 (Streamlit web interface)!")
-
-
-
-
 
 
 if __name__ == "__main__":
