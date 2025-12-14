@@ -1,8 +1,6 @@
 import bcrypt
-import os
-import re
 
-USER_DATA_FILE = "users.txt"
+USER_DATA_FILE = "DATA/users.txt"
 
 def hash_password(plain_text_password):
     # converting password to array of bytes
